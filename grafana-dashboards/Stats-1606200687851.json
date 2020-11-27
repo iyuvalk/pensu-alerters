@@ -1,0 +1,895 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_LOCAL_GRAPHITE",
+      "label": "Local Graphite",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "graphite",
+      "pluginName": "Graphite"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.4.3"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "graphite",
+      "name": "Graphite",
+      "version": "1.0.0"
+    }
+  ],
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "hideControls": false,
+  "id": null,
+  "links": [],
+  "refresh": "10s",
+  "rows": [
+    {
+      "collapse": false,
+      "height": 218,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_LOCAL_GRAPHITE}",
+          "fill": 1,
+          "id": 1,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p1,1)",
+              "color": "#0A437C",
+              "fill": 0
+            },
+            {
+              "alias": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p2,1)",
+              "color": "#447EBC",
+              "fill": 0
+            },
+            {
+              "alias": "/.*anomaly_likelihood.*/",
+              "color": "#E24D42",
+              "lines": false,
+              "points": true
+            }
+          ],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "A",
+              "target": "scaleToSeconds(stats.gauges.logstash.gateway.yuvalk.performance.disk.read_count.dev.nvme0n1p1, 1)"
+            },
+            {
+              "refId": "C",
+              "target": "scaleToSeconds(stats.gauges.logstash.gateway.yuvalk.performance.disk.read_count.dev.nvme0n1p2, 1)"
+            },
+            {
+              "refId": "B",
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p1, 1)"
+            },
+            {
+              "refId": "D",
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p2, 1)"
+            },
+            {
+              "refId": "E",
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p1, 0.99)"
+            },
+            {
+              "refId": "F",
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p2, 0.99)"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Disks activity",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_LOCAL_GRAPHITE}",
+          "fill": 1,
+          "id": 2,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p1,1)",
+              "color": "#447EBC",
+              "fill": 0
+            },
+            {
+              "alias": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.disk.write_count.dev.nvme0n1p1,1)",
+              "color": "#0A437C",
+              "fill": 0
+            },
+            {
+              "alias": "/.*anomaly_likelihood.*/",
+              "color": "#E24D42",
+              "lines": false,
+              "points": true
+            }
+          ],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "A",
+              "target": "scaleToSeconds(stats.gauges.logstash.gateway.*.performance.disk.read_count.dev.nvme0n1p1, 1)"
+            },
+            {
+              "refId": "B",
+              "target": "scaleToSeconds(stats.gauges.logstash.gateway.*.performance.disk.write_count.dev.nvme0n1p1, 1)"
+            },
+            {
+              "refId": "C",
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.disk.read_count.dev.nvme0n1p1, 1)"
+            },
+            {
+              "refId": "D",
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.disk.write_count.dev.nvme0n1p1, 1)"
+            },
+            {
+              "refId": "E",
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p1, 0.99)"
+            },
+            {
+              "refId": "F",
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.disk.write_count.dev.nvme0n1p1, 0.99)"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Disk IOPs",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "IOP/s",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 201,
+      "panels": [
+        {
+          "aliasColors": {
+            "stats.gauges.logstash.gateway.yuvalk.performance.cpu": "#B7DBAB",
+            "stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.cpu": "#3F6833"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_LOCAL_GRAPHITE}",
+          "fill": 1,
+          "id": 3,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "stats.gauges.logstash.gateway.yuvalk.performance.cpu",
+              "linewidth": 4
+            },
+            {
+              "alias": "stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.cpu",
+              "color": "#0A437C",
+              "fill": 0
+            },
+            {
+              "alias": "/.*anomaly_likelihood.*/",
+              "color": "#E24D42",
+              "lines": false,
+              "points": true
+            }
+          ],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "A",
+              "target": "stats.gauges.logstash.gateway.*.performance.cpu"
+            },
+            {
+              "refId": "B",
+              "target": "stats.gauges.logstash.host.*.prediction.metrics_analyzer.*.performance.cpu"
+            },
+            {
+              "refId": "C",
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.cpu, 0.99)"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "CPU Usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {
+            "stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.memory": "#0A437C"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_LOCAL_GRAPHITE}",
+          "fill": 1,
+          "id": 4,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.memory",
+              "fill": 0
+            },
+            {
+              "alias": "stats.gauges.logstash.gateway.yuvalk.performance.memory",
+              "linewidth": 4
+            },
+            {
+              "alias": "/.*anomaly_likelihood.*/",
+              "color": "#E24D42",
+              "lines": false,
+              "points": true
+            }
+          ],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "A",
+              "target": "stats.gauges.logstash.gateway.*.performance.memory"
+            },
+            {
+              "refId": "B",
+              "target": "stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.memory"
+            },
+            {
+              "refId": "C",
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.memory, 0.99)"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Memory Usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 212,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_LOCAL_GRAPHITE}",
+          "fill": 1,
+          "id": 5,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.network.wlo1.bytes_sent,1)",
+              "color": "#0A437C",
+              "fill": 0
+            },
+            {
+              "alias": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.network.wlo1.bytes_recv,1)",
+              "color": "#447EBC",
+              "fill": 0
+            },
+            {
+              "alias": "/.*anomaly_likelihood.*/",
+              "color": "#E24D42",
+              "lines": false,
+              "points": true
+            }
+          ],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "A",
+              "target": "scaleToSeconds(stats.gauges.logstash.gateway.*.performance.network.wlo1.bytes_recv, 1)"
+            },
+            {
+              "hide": false,
+              "refId": "B",
+              "target": "scaleToSeconds(stats.gauges.logstash.gateway.*.performance.network.wlo1.bytes_sent, 1)"
+            },
+            {
+              "hide": false,
+              "refId": "C",
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.network.wlo1.bytes_sent, 1)"
+            },
+            {
+              "hide": false,
+              "refId": "D",
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.network.wlo1.bytes_recv, 1)"
+            },
+            {
+              "refId": "E",
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.network.wlo1.bytes_recv, 0.99)"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Wireless Network Activity",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "Bps",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_LOCAL_GRAPHITE}",
+          "fill": 1,
+          "id": 9,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.network.wlo1.bytes_sent,1)",
+              "color": "#0A437C",
+              "fill": 0
+            },
+            {
+              "alias": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.network.wlo1.bytes_recv,1)",
+              "color": "#447EBC",
+              "fill": 0
+            },
+            {
+              "alias": "/.*anomaly_likelihood.*/",
+              "color": "#E24D42",
+              "lines": false,
+              "points": true
+            }
+          ],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "hide": false,
+              "refId": "B",
+              "target": "scaleToSeconds(stats.gauges.logstash.gateway.*.performance.network.wlo1.bytes_sent, 1)"
+            },
+            {
+              "hide": false,
+              "refId": "C",
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.network.wlo1.bytes_sent, 1)"
+            },
+            {
+              "refId": "E",
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.network.wlo1.bytes_sent, 0.99)"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Wireless Network Activity",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "Bps",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 205,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_LOCAL_GRAPHITE}",
+          "fill": 1,
+          "id": 6,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "A",
+              "target": "stats.counters.statsd.bad_lines_seen.*"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "StatsD stats",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_LOCAL_GRAPHITE}",
+          "fill": 1,
+          "id": 7,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "A",
+              "target": "keepLastValue(carbon.agents.*.metricsReceived, 10)"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Carbon stats",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    }
+  ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-12h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "Stats",
+  "version": 1
+}

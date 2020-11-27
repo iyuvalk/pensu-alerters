@@ -1,0 +1,192 @@
+version: "3.2"
+services:
+
+  zookeeper:
+    image: confluent/zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - net
+    environment:
+      zk_id: 1
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - target: 9092
+        published: 9092
+        protocol: tcp
+        mode: host
+    networks:
+      - net
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_CREATE_TOPICS: "metrics:1:1,pensu1:1:1,pensu2:1:1,pensu3:1:1,pensu_anomalies:1:1,pensu.htm.predictions:1:1,pensu.htm.anomaly_metrics:1:1,topics_topic:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: "pensu-alerter_zookeeper:2181"
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092
+      KAFKA_LISTENERS: INSIDE://:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+    depends_on:
+      - zookeeper
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - net
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
+
+  pensu1:
+    image: artifexil/pensu:latest
+    networks:
+      - net
+    depends_on:
+      - kafka
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
+    ports:
+      - target: 5555
+        published: 5556
+        protocol: tcp
+        mode: host
+    environment:
+      PENSU_KAFKA_CONSUMER_SERVER: "pensu-alerter_kafka:9092"
+      PENSU_KAFKA_PRODUCER_SERVER: "pensu-alerter_kafka:9092"
+      PENSU_TOPICS_KAFKA_TOPIC: "topics_topic"
+      PENSU_METRICS_KAFKA_TOPIC: "pensu1"
+      PENSU_ANOMALIES_METRICS_KAFKA_TOPIC: "pensu.htm.anomaly_metrics"
+
+  pensu2:
+    image: artifexil/pensu:latest
+    networks:
+      - net
+    depends_on:
+      - kafka
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
+    ports:
+      - target: 5555
+        published: 5557
+        protocol: tcp
+        mode: host
+    environment:
+      PENSU_KAFKA_CONSUMER_SERVER: "pensu-alerter_kafka:9092"
+      PENSU_KAFKA_PRODUCER_SERVER: "pensu-alerter_kafka:9092"
+      PENSU_TOPICS_KAFKA_TOPIC: "topics_topic"
+      PENSU_METRICS_KAFKA_TOPIC: "pensu2"
+      PENSU_ANOMALIES_METRICS_KAFKA_TOPIC: "pensu.htm.anomaly_metrics"
+
+  pensu3:
+    image: artifexil/pensu:latest
+    networks:
+      - net
+    depends_on:
+      - kafka
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
+    ports:
+      - target: 5555
+        published: 5558
+        protocol: tcp
+        mode: host
+    environment:
+      PENSU_KAFKA_CONSUMER_SERVER: "pensu-alerter_kafka:9092"
+      PENSU_KAFKA_PRODUCER_SERVER: "pensu-alerter_kafka:9092"
+      PENSU_TOPICS_KAFKA_TOPIC: "topics_topic"
+      PENSU_METRICS_KAFKA_TOPIC: "pensu3"
+      PENSU_ANOMALIES_METRICS_KAFKA_TOPIC: "pensu.htm.anomaly_metrics"
+
+  kafka_postman:
+    image: kafka-postman:latest
+    command: ./start-kafka-postman.sh --wait 20
+    networks:
+      - net
+    environment:
+      KAFKA_POSTMAN_KAFKA_CONSUMER_SERVER: "pensu-alerter_kafka:9092"
+      KAFKA_POSTMAN_SOURCE_TOPIC: "metrics"
+      KAFKA_POSTMAN_DISTRIBUTION_STRATEGY: "RANDOM"
+      KAFKA_POSTMAN_TOPIC_PINNING_ENABLED: "true"
+      KAFKA_POSTMAN_TOPIC_PINNING_REGEX: "^(\\S+)"
+      KAFKA_POSTMAN_REDIS_ADDRESSES: "pensu-alerter_redis:6379"
+      KAFKA_POSTMAN_TOPICS_VALIDATION_WHITELIST: "[\"pensu1\",\"pensu2\",\"pensu3\"]"
+
+    depends_on:
+      - kafka
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
+
+  metrics_ingress:
+    image: logstash2statsd:latest
+    networks:
+      - net
+    ports:
+      - target: 5555
+        published: 5555
+        protocol: tcp
+        mode: host
+      - target: 9600
+        published: 9600
+        protocol: tcp
+        mode: host
+    environment:
+      KAFKA_SERVER: "pensu-alerter_kafka:9092"
+      DEST_TOPIC: "metrics"
+      STATSD_SERVER: "pensu-alerter_metrics_storage_and_ui"
+    volumes:
+      - ./logstash.conf:/etc/logstash/conf.d/logstash.conf
+
+  pensu_alerter_telegram:
+    image: artifexil/pensu_alerter_telegram_bot
+    networks:
+      - net
+    environment:
+      PENSU_ALERTER_TELEGRAM_BOT_ID: "${PENSU_ALERTER_TELEGRAM_BOT_ID}"
+      PENSU_ALERTER_TELEGRAM_BOT_SECRET: "${PENSU_ALERTER_TELEGRAM_BOT_SECRET}"
+      PENSU_ALERTER_TELEGRAM_KAFKA_SERVER: "pensu-alerter_kafka:9092"
+      PENSU_ALERTER_TELEGRAM_KAFKA_CLIENT_ID: "pensu_alerter"
+      PENSU_ALERTER_TELEGRAM_ALERTS_TOPIC: "pensu_anomalies"
+      PENSU_ALERTER_TELEGRAM_KAFKA_SESSION_TIMEOUT: 30000
+
+  metrics_storage_and_ui:
+    image: marial/grafana-graphite-statsd
+    networks:
+      - net
+    ports:
+      - target: 80
+        published: 3000
+        protocol: tcp
+        mode: host
+# Enable this and create the relevant folder to store the metric files
+#    volumes:
+#    - /tmp/pensu_alerts_metrics:/opt/graphite/storage/whisper
+
+networks:
+  net:

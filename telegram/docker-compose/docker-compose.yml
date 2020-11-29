@@ -17,11 +17,6 @@ services:
 
   kafka:
     image: wurstmeister/kafka
-    ports:
-      - target: 9092
-        published: 9092
-        protocol: tcp
-        mode: host
     networks:
       - net
     environment:

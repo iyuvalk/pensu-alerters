@@ -138,7 +138,7 @@ services:
         condition: any
 
   metrics_ingress:
-    image: logstash2statsd:latest
+    image: artifexil/logstash2statsd:latest
     networks:
       - net
     ports:

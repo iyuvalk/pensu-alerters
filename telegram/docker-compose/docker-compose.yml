@@ -117,7 +117,7 @@ services:
       PENSU_ANOMALIES_METRICS_KAFKA_TOPIC: "pensu.htm.anomaly_metrics"
 
   kafka_postman:
-    image: kafka-postman:latest
+    image: artifexil/kafka-postman:latest
     command: ./start-kafka-postman.sh --wait 20
     networks:
       - net

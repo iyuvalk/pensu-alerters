@@ -134,7 +134,6 @@ services:
       KAFKA_POSTMAN_TOPIC_PINNING_REGEX: "^(\\S+)"
       KAFKA_POSTMAN_REDIS_ADDRESSES: "pensu-alerter_redis:6379"
       KAFKA_POSTMAN_TOPICS_VALIDATION_WHITELIST: "[\"pensu1\",\"pensu2\",\"pensu3\"]"
-
     depends_on:
       - kafka
     deploy:
@@ -162,6 +161,13 @@ services:
       STATSD_SERVER: "pensu-alerter_metrics_storage_and_ui"
     volumes:
       - ./logstash.conf:/etc/logstash/conf.d/logstash.conf
+    depends_on:
+      - kafka
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
 
   pensu_alerter_telegram:
     image: artifexil/pensu_alerter_telegram_bot
@@ -174,6 +180,13 @@ services:
       PENSU_ALERTER_TELEGRAM_KAFKA_CLIENT_ID: "pensu_alerter"
       PENSU_ALERTER_TELEGRAM_ALERTS_TOPIC: "pensu_anomalies"
       PENSU_ALERTER_TELEGRAM_KAFKA_SESSION_TIMEOUT: 30000
+    depends_on:
+      - kafka
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
 
   metrics_storage_and_ui:
     image: marial/grafana-graphite-statsd
@@ -184,6 +197,13 @@ services:
         published: 3000
         protocol: tcp
         mode: host
+    depends_on:
+      - kafka
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
 # Enable this and create the relevant folder to store the metric files
 #    volumes:
 #    - /tmp/pensu_alerts_metrics:/opt/graphite/storage/whisper

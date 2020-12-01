@@ -52,7 +52,10 @@ def get_metrics():
     for key in temperature_sensors.keys():
         if len(temperature_sensors[key]) > 1:
             for sub_key in range(1, len(temperature_sensors[key])):
-                metrics[hostname + '.temperature.' + key + '.' + str(temperature_sensors[key][sub_key].label).replace(' ', '_') ] = temperature_sensors[key][sub_key].current
+                metric_key = str(temperature_sensors[key][sub_key].label).replace(' ', '_')
+                if len(metric_key.strip()) == 0:
+                    metric_key = str(sub_key)
+                metrics[hostname + '.temperature.' + key + '.' + metric_key] = temperature_sensors[key][sub_key].current
         else:
             metrics[hostname + '.temperature.' + key] = temperature_sensors[key][0].current
     return metrics

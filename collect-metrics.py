@@ -33,16 +33,28 @@ def get_metrics():
     }
 
     partitions = psutil.disk_partitions()
+    disk_counters_number = 0
     for partition in partitions:
+        if disk_counters_number > 2:
+            break
         if re.match('/dev/nvme.*', partition.device) or re.match('/dev/sd[abcd].*', partition.device):
             metrics[hostname + '.performance.disk.read_count' + partition.device.replace('/', '.')] = psutil.disk_io_counters().read_count
             metrics[hostname + '.performance.disk.write_count' + partition.device.replace('/', '.')] = psutil.disk_io_counters().write_count
+            disk_counters_number = disk_counters_number + 1
 
     nics_data = psutil.net_io_counters(pernic=True)
     for nic in nics_data.keys():
-        if re.match('eno[0-9]', nic) or re.match('eth[0-9]', nic) or re.match('wlo[0-9]', nic):
+        if re.match('en[a-z][0-9]', nic) or re.match('eth[0-9]', nic) or re.match('wl[a-z][0-9]', nic):
             metrics[hostname + '.performance.network.' + nic + '.bytes_sent'] = nics_data[nic].bytes_sent
             metrics[hostname + '.performance.network.' + nic + '.bytes_recv'] = nics_data[nic].bytes_recv
+
+    temperature_sensors = psutil.sensors_temperatures()
+    for key in temperature_sensors.keys():
+        if len(temperature_sensors[key]) > 1:
+            for sub_key in range(1, len(temperature_sensors[key])):
+                metrics[hostname + '.temperature.' + key + '.' + temperature_sensors[key][sub_key].label] = temperature_sensors[key][sub_key].current
+        else:
+            metrics[hostname + '.temperature.' + key] = temperature_sensors[key][0].current
     return metrics
 
 

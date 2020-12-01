@@ -69,6 +69,13 @@ services:
       PENSU_TOPICS_KAFKA_TOPIC: "topics_topic"
       PENSU_METRICS_KAFKA_TOPIC: "pensu1"
       PENSU_ANOMALIES_METRICS_KAFKA_TOPIC: "pensu.htm.anomaly_metrics"
+      PENSU_MAX_ALLOWED_MODELS: 10
+      PENSU_ANOMALY_LIKELIHOOD_THRESHOLD: 0.99
+      PENSU_ANOMALY_SCORE_THRESHOLD: 0.99
+      PENSU_MINIMUM_CONFIDENCE_FOR_REPORTING: 0.9
+      PENSU_MODELS_AUTOSAVE_INTERVAL: 86400
+#    volumes:
+#    - /tmp/pensu_1_models:/data_models
 
   pensu2:
     image: artifexil/pensu:latest
@@ -92,6 +99,13 @@ services:
       PENSU_TOPICS_KAFKA_TOPIC: "topics_topic"
       PENSU_METRICS_KAFKA_TOPIC: "pensu2"
       PENSU_ANOMALIES_METRICS_KAFKA_TOPIC: "pensu.htm.anomaly_metrics"
+      PENSU_MAX_ALLOWED_MODELS: 10
+      PENSU_ANOMALY_LIKELIHOOD_THRESHOLD: 0.99
+      PENSU_ANOMALY_SCORE_THRESHOLD: 0.99
+      PENSU_MINIMUM_CONFIDENCE_FOR_REPORTING: 0.9
+      PENSU_MODELS_AUTOSAVE_INTERVAL: 86400
+#    volumes:
+#    - /tmp/pensu_2_models:/data_models
 
   pensu3:
     image: artifexil/pensu:latest
@@ -115,6 +129,13 @@ services:
       PENSU_TOPICS_KAFKA_TOPIC: "topics_topic"
       PENSU_METRICS_KAFKA_TOPIC: "pensu3"
       PENSU_ANOMALIES_METRICS_KAFKA_TOPIC: "pensu.htm.anomaly_metrics"
+      PENSU_MAX_ALLOWED_MODELS: 10
+      PENSU_ANOMALY_LIKELIHOOD_THRESHOLD: 0.99
+      PENSU_ANOMALY_SCORE_THRESHOLD: 0.99
+      PENSU_MINIMUM_CONFIDENCE_FOR_REPORTING: 0.9
+      PENSU_MODELS_AUTOSAVE_INTERVAL: 86400
+#    volumes:
+#    - /tmp/pensu_3_models:/data_models
 
   kafka_postman:
     image: artifexil/kafka-postman:latest

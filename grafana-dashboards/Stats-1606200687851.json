@@ -94,27 +94,27 @@
           "targets": [
             {
               "refId": "A",
-              "target": "scaleToSeconds(stats.gauges.logstash.gateway.yuvalk.performance.disk.read_count.dev.nvme0n1p1, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.172_18_0_1.multi.performance.disk.write_count.dev.sda1, 1)"
             },
             {
               "refId": "C",
-              "target": "scaleToSeconds(stats.gauges.logstash.gateway.yuvalk.performance.disk.read_count.dev.nvme0n1p2, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.172_18_0_1.multi.performance.disk.write_count.dev.sdb1, 1)"
             },
             {
               "refId": "B",
-              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p1, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.multi.performance.disk.read_count.dev.sda1, 1)"
             },
             {
               "refId": "D",
-              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p2, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.multi.performance.disk.read_count.dev.sdb1, 1)"
             },
             {
               "refId": "E",
-              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p1, 0.99)"
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.multi.performance.disk.read_count.dev.sda1, 0.99)"
             },
             {
               "refId": "F",
-              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p2, 0.99)"
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.multi.performance.disk.read_count.dev.sdb1, 0.99)"
             }
           ],
           "thresholds": [],
@@ -203,27 +203,27 @@
           "targets": [
             {
               "refId": "A",
-              "target": "scaleToSeconds(stats.gauges.logstash.gateway.*.performance.disk.read_count.dev.nvme0n1p1, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.172_18_0_1.*.performance.disk.read_count.dev.sda1, 1)"
             },
             {
               "refId": "B",
-              "target": "scaleToSeconds(stats.gauges.logstash.gateway.*.performance.disk.write_count.dev.nvme0n1p1, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.172_18_0_1.*.performance.disk.write_count.dev.sdb1, 1)"
             },
             {
               "refId": "C",
-              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.disk.read_count.dev.nvme0n1p1, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.disk.read_count.dev.sda1, 1)"
             },
             {
               "refId": "D",
-              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.disk.write_count.dev.nvme0n1p1, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.disk.write_count.dev.sdb1, 1)"
             },
             {
               "refId": "E",
-              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.disk.read_count.dev.nvme0n1p1, 0.99)"
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.multi.performance.disk.read_count.dev.sda1, 0.99)"
             },
             {
               "refId": "F",
-              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.disk.write_count.dev.nvme0n1p1, 0.99)"
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.multi.performance.disk.write_count.dev.sdb1, 0.99)"
             }
           ],
           "thresholds": [],
@@ -532,12 +532,12 @@
           "targets": [
             {
               "refId": "A",
-              "target": "scaleToSeconds(stats.gauges.logstash.gateway.*.performance.network.wlo1.bytes_recv, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.172_18_0_1.multi.performance.select metric, 1)"
             },
             {
               "hide": false,
               "refId": "B",
-              "target": "scaleToSeconds(stats.gauges.logstash.gateway.*.performance.network.wlo1.bytes_sent, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.172_18_0_1.multi.performance.select metric, 1)"
             },
             {
               "hide": false,

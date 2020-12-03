@@ -220,8 +220,9 @@ services:
       replicas: 1
       restart_policy:
         condition: any
+    volumes:
+    - ./config.js:/src/statsd/config.js
 # Enable this and create the relevant folder to store the metric files
-#    volumes:
 #    - /tmp/pensu_alerts_metrics:/opt/graphite/storage/whisper
 
 networks:

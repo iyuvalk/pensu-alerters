@@ -6,9 +6,9 @@
 
   graphitePort: 2003,
   graphiteHost: "127.0.0.1",
-  flushInterval: 10000,
+  flushInterval: 1000,
   deleteIdleStats: true,
-  gaugesMaxTTL: 3,
+  gaugesMaxTTL: 60,
 
   backends: ['./backends/graphite'],
   graphite: {

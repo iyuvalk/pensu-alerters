@@ -21,7 +21,7 @@ services:
       - net
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_CREATE_TOPICS: "metrics:1:1:compact,pensu1:1:1:compact,pensu2:1:1:compact,pensu3:1:1:compact,pensu_anomalies:1:1:compact,pensu.htm.predictions:1:1:compact,pensu.htm.anomaly_metrics:1:1:compact,topics_topic:1:1:compact"
+      KAFKA_CREATE_TOPICS: "metrics:1:0:compact,pensu1:1:0:compact,pensu2:1:0:compact,pensu3:1:0:compact,pensu_anomalies:1:0:compact,pensu.htm.predictions:1:0:compact,pensu.htm.anomaly_metrics:1:0:compact,topics_topic:1:0:compact"
       KAFKA_ZOOKEEPER_CONNECT: "pensu-alerter_zookeeper:2181"
       KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092
       KAFKA_LISTENERS: INSIDE://:9092

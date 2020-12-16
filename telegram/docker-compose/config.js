@@ -8,7 +8,7 @@
   graphiteHost: "127.0.0.1",
   flushInterval: 10000,
   deleteGauges: true,
-  gaugesMaxTTL: 6,
+  gaugesMaxTTL: 12,
 
   backends: ['./backends/graphite'],
   graphite: {

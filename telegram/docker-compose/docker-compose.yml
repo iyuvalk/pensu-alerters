@@ -73,7 +73,7 @@ services:
       PENSU_ANOMALY_LIKELIHOOD_THRESHOLD: 0.99
       PENSU_ANOMALY_SCORE_THRESHOLD: 0.99
       PENSU_MINIMUM_CONFIDENCE_FOR_REPORTING: 0.9
-      PENSU_MODELS_AUTOSAVE_INTERVAL: 86400
+      PENSU_MODELS_AUTOSAVE_INTERVAL: 0
 #    volumes:
 #    - /tmp/pensu_1_models:/data_models
 
@@ -103,7 +103,7 @@ services:
       PENSU_ANOMALY_LIKELIHOOD_THRESHOLD: 0.99
       PENSU_ANOMALY_SCORE_THRESHOLD: 0.99
       PENSU_MINIMUM_CONFIDENCE_FOR_REPORTING: 0.9
-      PENSU_MODELS_AUTOSAVE_INTERVAL: 86400
+      PENSU_MODELS_AUTOSAVE_INTERVAL: 0
 #    volumes:
 #    - /tmp/pensu_2_models:/data_models
 
@@ -133,9 +133,39 @@ services:
       PENSU_ANOMALY_LIKELIHOOD_THRESHOLD: 0.99
       PENSU_ANOMALY_SCORE_THRESHOLD: 0.99
       PENSU_MINIMUM_CONFIDENCE_FOR_REPORTING: 0.9
-      PENSU_MODELS_AUTOSAVE_INTERVAL: 86400
+      PENSU_MODELS_AUTOSAVE_INTERVAL: 0
 #    volumes:
 #    - /tmp/pensu_3_models:/data_models
+
+  pensu4:
+    image: artifexil/pensu:latest
+    networks:
+      - net
+    depends_on:
+      - kafka
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: any
+    ports:
+      - target: 5555
+        published: 5559
+        protocol: tcp
+        mode: host
+    environment:
+      PENSU_KAFKA_CONSUMER_SERVER: "pensu-alerter_kafka:9092"
+      PENSU_KAFKA_PRODUCER_SERVER: "pensu-alerter_kafka:9092"
+      PENSU_TOPICS_KAFKA_TOPIC: "topics_topic"
+      PENSU_METRICS_KAFKA_TOPIC: "pensu4"
+      PENSU_ANOMALIES_METRICS_KAFKA_TOPIC: "pensu.htm.anomaly_metrics"
+      PENSU_MAX_ALLOWED_MODELS: 10
+      PENSU_ANOMALY_LIKELIHOOD_THRESHOLD: 0.99
+      PENSU_ANOMALY_SCORE_THRESHOLD: 0.99
+      PENSU_MINIMUM_CONFIDENCE_FOR_REPORTING: 0.9
+      PENSU_MODELS_AUTOSAVE_INTERVAL: 0
+#    volumes:
+#    - /tmp/pensu_4_models:/data_models
 
   kafka_postman:
     image: artifexil/kafka-postman:latest

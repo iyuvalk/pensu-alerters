@@ -94,11 +94,11 @@
           "targets": [
             {
               "refId": "A",
-              "target": "scaleToSeconds(stats.gauges.logstash.172_18_0_1.multi.performance.disk.write_count.dev.sda1, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.*.multi.performance.disk.write_count.dev.select metric, 1)"
             },
             {
               "refId": "C",
-              "target": "scaleToSeconds(stats.gauges.logstash.172_18_0_1.multi.performance.disk.write_count.dev.sdb1, 1)"
+              "target": "scaleToSeconds(stats.gauges.logstash.*.multi.performance.disk.write_count.dev.sdb1, 1)"
             },
             {
               "refId": "B",
@@ -325,16 +325,17 @@
           "steppedLine": false,
           "targets": [
             {
+              "hide": false,
               "refId": "A",
-              "target": "stats.gauges.logstash.gateway.*.performance.cpu"
+              "target": "keepLastValue(stats.gauges.logstash.*.multi.performance.cpu, 100)"
             },
             {
               "refId": "B",
-              "target": "stats.gauges.logstash.host.*.prediction.metrics_analyzer.*.performance.cpu"
+              "target": "keepLastValue(stats.gauges.logstash.host.*.prediction.metrics_analyzer.*.performance.cpu, 100)"
             },
             {
               "refId": "C",
-              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.cpu, 0.99)"
+              "target": "keepLastValue(removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.multi.performance.cpu, 0.99), 100)"
             }
           ],
           "thresholds": [],
@@ -423,15 +424,17 @@
           "targets": [
             {
               "refId": "A",
-              "target": "stats.gauges.logstash.gateway.*.performance.memory"
+              "target": "keepLastValue(stats.gauges.logstash.*.multi.performance.memory, 100)"
             },
             {
+              "hide": false,
               "refId": "B",
-              "target": "stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.memory"
+              "target": "keepLastValue(stats.gauges.logstash.host.pensu.prediction.metrics_analyzer.*.performance.memory, 100)"
             },
             {
+              "hide": false,
               "refId": "C",
-              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.yuvalk.performance.memory, 0.99)"
+              "target": "removeBelowValue(stats.gauges.logstash.host.pensu.anomaly_likelihood.metrics_analyzer.multi.performance.memory, 0.99)"
             }
           ],
           "thresholds": [],
@@ -891,5 +894,5 @@
   },
   "timezone": "",
   "title": "Stats",
-  "version": 1
+  "version": 2
 }
